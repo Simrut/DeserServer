@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="vulnerable_server:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/vulnerable_server_jar</output-path>
+    <root id="archive" name="vulnerable_server.jar">
+      <element id="module-output" name="vulnerable_server" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/commons-collections-3.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
