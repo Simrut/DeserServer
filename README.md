@@ -6,7 +6,7 @@ It was made using Java 8 and runs by default on port 6789 of localhost.
 
 ## Vulnerability
 
-The server includes the vulnerable Apache Commons Collection 3.1 which can lead to code execution.
+The server has the vulnerable Apache Commons Collection 3.1 in its Classpath which can lead to code execution.
 It is to be found in file DeserServer/src/Connection.java, where a base64 string gets decoded and deserialized, as well as cast to an object.
 
 ## Usage
