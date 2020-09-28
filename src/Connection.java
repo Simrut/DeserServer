@@ -80,16 +80,7 @@ public class Connection implements Runnable {
     }
 
     /**
-     * Sends the appropriate response based on the client request.
-     * <p>
-     * If the URL requested is inside of the redirect HashMap
-     * the client is sent a HTTP 301 error redirect response, sending the client to
-     * the new URL location. If the URL requested is not inside of the redirect HashMap
-     * and does not exist an HTTP 404 error response is sent. If the URL request
-     * exists an HTTP 200 OK response is sent.
-     *
-     * @throws IOException if outStream, fileStream, or bufInputStream is closed or does not exist
-     *                     while they are being used.
+     * Sends a basic response when requested
      */
     private void sendResponse() throws IOException {
 
