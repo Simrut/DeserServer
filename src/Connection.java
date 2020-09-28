@@ -72,10 +72,10 @@ public class Connection implements Runnable {
             byte [] data = Base64.getDecoder().decode( objectString );
             ObjectInputStream ois = new ObjectInputStream(
                     new ByteArrayInputStream(  data ) );
-            BeanMap object  = (BeanMap) ois.readObject();//TODO this is the object the malicious payload uses, is there code execution?
+            BeanMap object  = (BeanMap) ois.readObject();
             ois.close();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace(); //TODO possibly no problem that deser doesnt work, just needs to be vulnerable
+            e.printStackTrace();
         }
     }
 
