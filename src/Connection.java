@@ -65,9 +65,8 @@ public class Connection implements Runnable {
         }
         System.out.println("Payload data is: " + payload.toString());
 
-        String objectString = payload.toString().split("\n")[7]; //TODO find a better way to split from header
-       /* InputStream is = connectionSocket.getInputStream();
-        ObjectInputStream ois = new ObjectInputStream(is);*/
+        String objectString = payload.toString().split("\r\n\r\n")[1]; //could also be vulnerable to http response splitting
+
         try {
             byte [] data = Base64.getDecoder().decode( objectString );
             ObjectInputStream ois = new ObjectInputStream(
