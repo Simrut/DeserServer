@@ -124,6 +124,19 @@ public class Connection implements Runnable {
         } catch (IOException ex) {
             // If an IOException is caught print out the stack of commands that leads to the error
             ex.printStackTrace();
+            // Send an appropriate response to the client based on the request received by the server
+
+        }
+        finally{
+            try {
+                sendResponse();
+                // Close the client connection
+                this.connectionSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
 }
