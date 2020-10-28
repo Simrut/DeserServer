@@ -2,8 +2,14 @@ package src;
 
 
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+import java.io.FileInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.KeyStore;
 
 /**
  * WebServer Object.
@@ -26,10 +32,22 @@ public class WebServer {
      *
      */
     public static void main(String[] args) throws Exception {
+        String ksName = "vuln_serv_keystore.jks";
+        char ksPass[] = "HerongJKS".toCharArray();
+        char ctPass[] = "HerongJKS".toCharArray();
 
-        // Create ServerSocket on LocalHost, port 6789
-        ServerSocket serverSocket = new ServerSocket(6789);
-        System.out.println("Listening for connections on port 6789...\r\n");
+        KeyStore ks = KeyStore.getInstance("JKS");
+        ks.load(new FileInputStream(ksName), ksPass);
+        KeyManagerFactory kmf =
+                KeyManagerFactory.getInstance("SunX509");
+        kmf.init(ks, ctPass);
+        SSLContext sc = SSLContext.getInstance("TLS");
+        sc.init(kmf.getKeyManagers(), null, null);
+        SSLServerSocketFactory ssf = sc.getServerSocketFactory();
+
+        // Create SSLServerSocket on LocalHost, port 6789
+        SSLServerSocket serverSocket = (SSLServerSocket) ssf.createServerSocket(6789);
+        System.out.println("Listening for HTTPS connections on port 6789...\r\n");
 
         // Listen for new client connections
         while(true) {
